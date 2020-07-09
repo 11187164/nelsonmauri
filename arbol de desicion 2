@@ -1,0 +1,35 @@
+#paquete mpv
+data(table.b3)
+table.b3[22:26,]
+datos<-table.b3[-c(23,25),]
+library(rpart)
+library(rpart.plot)
+mod1 <- rpart(y ~ ., data=datos)
+prp(mod1)  
+prp(mod1, main="",
+    nn = TRUE,             # display the node numbers
+    fallen.leaves = TRUE,  # put the leaves on the bottom of the page
+    shadow.col = "gray",   # shadows under the leaves
+    branch.lty = 3,        # draw branches using dotted lines
+    branch = .5,           # change angle of branch lines
+    faclen = 0,            # faclen = 0 to print full factor names
+    trace = 1,             # print the auto calculated cex, xlim, ylim
+    split.cex = 1.2,       # make the split text larger than the node text
+    split.prefix = "is ",  # put "is " before split text
+    split.suffix = "?",    # put "?" after split text
+    split.box.col = "lightblue",   # lightgray split boxes (default is white)
+    split.border.col = "darkgray", # darkgray border on split boxes
+    split.round = 0.5)             # round the split box corners a tad
+mod1 <- rpart(y ~ x2 + x9, data=datos)
+with(datos, plot(x=x2, y=x9))
+abline(h=66, lty='dashed', col='blue')
+segments(x0=144, y0=66, x1=144, y1=82, lty='dashed', col='blue')
+text(x=120, y=63, labels='y=28', col=4)
+text(x=90, y=73, labels='y=20', col=4)
+text(x=190, y=73, labels='y=16', col=4)
+nuevos_datos <- data.frame(x2=c(100, 150), x9=c(70, 60))
+predict(object=mod1, newdata=nuevos_datos)
+y_hat <- predict(object=mod1, newdata=datos)
+cor(y_hat, datos$y)
+plot(x=datos$y, y=y_hat, pch=20, las=1, xlab='y', ylab=expression(hat(y)))
+abline(a=0, b=1, lty="dashed", col="blue")
