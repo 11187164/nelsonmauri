@@ -1,0 +1,35 @@
+ead(iris)
+set <- iris[1:50, 1]
+ver <- iris[51:100, 1]
+vir <- iris[101:150, 1]
+plot(density(set))
+plot(density(ver))
+plot(vir)
+plot(density(vir))
+lines(density(ver))
+lines(density(vir))
+plot(density(set), xlim = c(4, 8.5))
+lines(density(ver))
+lines(density(vir))
+plot(density(set), xlim = c(4, 8.5), col = "blue")
+lines(density(ver), col = "green")
+lines(density(vir), col = "red")
+plot(density(set), xlim = c(4, 8.5), lty = 1)
+lines(density(ver), lty = 2)
+lines(density(vir), lty = 3)
+legend("topright", c("setosa", "versicolor", "virginica"),
+       lty = 1, col = c("blue", "green", "red"))
+#compute k-means with k = 3
+data("iris")
+df <- iris
+head(df, 3)
+set.seed(123)
+res.km <- kmeans(scale(df[, -5]), 3, nstart = 25)
+fviz_cluster(res.km, data = df[, -5],
+             palette = c("red", "blue", "green"), 
+             geom = "point",
+             ellipse.type = "convex", 
+             ggtheme = theme_bw())
+library(factoextra)
+library(ggplot2)
+fvi
