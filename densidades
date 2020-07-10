@@ -1,0 +1,26 @@
+z <- c(3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1,
+       3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8,
+       3.4, 3.7, 3.6, 3.3, 3.4, 3.0, 3.4, 3.5, 3.4, 3.2,
+       3.1, 3.4, 4.1, 4.2, 3.1, 3.2, 3.5, 3.6, 3.0, 3.4,
+       3.5, 2.3, 3.2, 3.5, 3.8, 3.0, 3.8, 3.2, 3.7, 3.3)
+#freq = TRUE indica la frecuencia absoluta (conteo) en el eje y (es el valor por defecto).
+#freq = FALSE indica la densidad.
+
+hist(z, freq = FALSE)
+#or el valor “Freedman-Diaconis” (FD).
+hist(z, freq = FALSE, breaks = "FD")
+density(z)
+plot(density(z))
+hist(z, freq = F)
+lines(density(z))
+#Ya que vamos a comparar dos 
+#métodos (“Sturges” y “Freedman-Diaconis”) 
+#dibujaré los mismos ejes en ambos 
+#gráficos (xlim y ylim iguales en cada gráfico).
+hist(z, freq = F, xlim = c(2, 5), ylim =c(0, 1.1),
+     breaks = "Sturges")
+lines(density(z))
+#Método “Freedman-Diaconis”
+hist(z, freq = F, xlim = c(2, 5), ylim =c(0, 1.1),
+     breaks = "FD")
+lines(density(z))
